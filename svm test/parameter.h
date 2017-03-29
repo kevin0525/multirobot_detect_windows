@@ -1,9 +1,9 @@
 //-----------------------宏定义----------------------------
 //---------------------------------------------------------
-#define IrobotSetNo 103			//机器人样本个数  
-#define ObstacleSetNo 73		//障碍样本个数
-#define BackgroundSetNo 119		//背景样本个数
-#define HardBackgroundSetNo 45	//Hard背景样本个数
+#define IrobotSetNo 276			//机器人样本个数  
+#define ObstacleSetNo 151		//障碍样本个数
+#define BackgroundSetNo 498		//背景样本个数
+#define HardBackgroundSetNo 13	//Hard背景样本个数
 
 #define SHOWSET false			//是否显示训练样本
 #define TRAIN true				//是否进行训练,true表示训练，false表示读取xml文件中的SVM模型
@@ -57,18 +57,18 @@
 //detectMultiScale部分参数
 #define HitThreshold 0			//特征向量与超平面最小距离
 #define WinStride Size(8,8)		//移动步长(必须是block步长的整数倍)
-#define DetScale 1.05			//源图像图像每次缩小比例
+#define DetScale 1.1			//源图像图像每次缩小比例
 
 #define TestImage "../Data/TestImage/13.jpg"				//用于检测的测试图像
 #define ResultImage "../Data/Result/13.jpg"					//测试图像的检测结果
 #define ResultImageFile_1 "..\\Data\\Result\\13-1\\"		//测试图像的分类框图文件夹1
 #define ResultImageFile_2 "..\\Data\\Result\\13-2\\"		//测试图像的分类框图文件夹2
 #define ResultImageFile_3 "..\\Data\\Result\\13-3\\"		//测试图像的分类框图文件夹3
-#define TestVideo "../Data/TestVideo/328.avi"			//用于检测的测试视频
-#define ResultVideo "../Data/Result/328.avi"			//测试视频的检测结果
-#define ResultVideoFile_1 "..\\Data\\Result\\vivi-2017.3.12\\"	//测试视频的分类框图文件夹1
-#define ResultVideoFile_2 "..\\Data\\Result\\vivi-2017.3.12\\"	//测试视频的分类框图文件夹2
-#define ResultVideoFile_3 "..\\Data\\Result\\vivi-2017.3.12\\"	//测试视频的分类框图文件夹3
+#define TestVideo "../Data/TestVideo/329_2.avi"			//用于检测的测试视频
+#define ResultVideo "../Data/Result/329_2.avi"			//测试视频的检测结果
+#define ResultVideoFile_1 "..\\Data\\Result\\329_1\\"	//测试视频的分类框图文件夹1
+#define ResultVideoFile_2 "..\\Data\\Result\\329_2\\"	//测试视频的分类框图文件夹2
+#define ResultVideoFile_3 "..\\Data\\Result\\329_3\\"	//测试视频的分类框图文件夹3
 
 #define IrobotSetFile "../Data/IrobotSet/"					//机器人样本图片文件夹
 #define ObstacleSetFile "../Data/ObstacleSet/"				//障碍样本图片文件夹
