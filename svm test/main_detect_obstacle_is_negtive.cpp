@@ -18,7 +18,7 @@ using namespace cv;
 int main()  
 {
 	//变量定义
-	HOGDescriptor hogDetectTrain(WinSizeDetect,BlockSizeDetect,BlockStrideDetect,CellSizeDetect,NbinsDetect);//HOG描述子：检测窗口，block尺寸，block步长，cell尺寸，直方图bin个数 
+	HOGDescriptor detectHOG(WinSizeDetect,BlockSizeDetect,BlockStrideDetect,CellSizeDetect,NbinsDetect);//HOG描述子：检测窗口，block尺寸，block步长，cell尺寸，直方图bin个数 
 	int descriptorDimDetect;//HOG描述子的维数：[(检测窗口长-block长)/block步长+1]*[(检测窗口高-block高)/block步高+1]*bin个数*(block长/cell长)*(block高/cell高)
 	MySVM detectSvm;//检测SVM
 
@@ -68,7 +68,7 @@ int main()
 				}
 
 				vector<float> descriptorsDetect;//HOG描述子向量
-				hogDetectTrain.compute(srcDetect,descriptorsDetect);//计算HOG描述子
+				detectHOG.compute(srcDetect,descriptorsDetect);//计算HOG描述子
 
 				if(num == 0)//处理第一个样本时初始化特征向量矩阵和类别矩阵  
 				{
@@ -102,7 +102,7 @@ int main()
 				}
 
 				vector<float> descriptorsDetect;//HOG描述子向量
-				hogDetectTrain.compute(srcDetect,descriptorsDetect);//计算HOG描述子
+				detectHOG.compute(srcDetect,descriptorsDetect);//计算HOG描述子
 
 				//将计算好的HOG描述子复制到特征向量矩阵和类别矩阵
 				for(int i=0; i<descriptorDimDetect; i++)
@@ -129,7 +129,7 @@ int main()
 				}
 
 				vector<float> descriptorsDetect;//HOG描述子向量
-				hogDetectTrain.compute(srcDetect,descriptorsDetect);//计算HOG描述子
+				detectHOG.compute(srcDetect,descriptorsDetect);//计算HOG描述子
 
 				//将计算好的HOG描述子复制到特征向量矩阵和类别矩阵
 				for(int i=0; i<descriptorDimDetect; i++)
@@ -156,7 +156,7 @@ int main()
 				}
 
 				vector<float> descriptorsDetect;//HOG描述子向量
-				hogDetectTrain.compute(srcDetect,descriptorsDetect);//计算HOG描述子
+				detectHOG.compute(srcDetect,descriptorsDetect);//计算HOG描述子
 
 				//将计算好的HOG描述子复制到特征向量矩阵和类别矩阵
 				for(int i=0; i<descriptorDimDetect; i++)
@@ -184,7 +184,6 @@ int main()
 	//----------------进行机器人和障碍物的检测与分类-----------------
 	//---------------------------------------------------------------
 	//变量定义
-	HOGDescriptor detectHOG(WinSizeDetect,BlockSizeDetect,BlockStrideDetect,CellSizeDetect,NbinsDetect);//分类HOG检测器
 	descriptorDimDetect = detectSvm.get_var_count();//特征向量的维数，即HOG描述子的维数（和前面训练时的大小一样，添加此句是为了在不训练时也能拿到维数）
 	int supportVectorNumDetect = detectSvm.get_support_vector_count();//支持向量的个数
 	cout<<"Detect支持向量个数："<<supportVectorNumDetect<<endl;  

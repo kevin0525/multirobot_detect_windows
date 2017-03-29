@@ -1,13 +1,13 @@
 //-----------------------宏定义----------------------------
 //---------------------------------------------------------
-#define IrobotSetNo 925			//机器人样本个数  
-#define ObstacleSetNo 20		//障碍样本个数
-#define BackgroundSetNo 624		//背景样本个数
-#define HardBackgroundSetNo 169	//Hard背景样本个数
+#define IrobotSetNo 103			//机器人样本个数  
+#define ObstacleSetNo 73		//障碍样本个数
+#define BackgroundSetNo 119		//背景样本个数
+#define HardBackgroundSetNo 45	//Hard背景样本个数
 
 #define SHOWSET false			//是否显示训练样本
 #define TRAIN true				//是否进行训练,true表示训练，false表示读取xml文件中的SVM模型
-#define SAVESET false			//是否保存检测数据
+#define SAVESET true			//是否保存检测数据
 
 /*//for cpu
 //HOG描述子参数
@@ -34,7 +34,7 @@
 #define NbinsDetect 9					//直方图bin个数
 
 //HOG描述子参数
-#define WinSizeClassify Size(48,48)		//检测窗口尺寸
+#define WinSizeClassify Size(56,56)		//检测窗口尺寸
 #define BlockSizeClassify Size(16,16)		//block尺寸
 #define BlockStrideClassify Size(8,8)	//block步长
 #define CellSizeClassify Size(8,8)		//cell尺寸
@@ -64,8 +64,8 @@
 #define ResultImageFile_1 "..\\Data\\Result\\13-1\\"		//测试图像的分类框图文件夹1
 #define ResultImageFile_2 "..\\Data\\Result\\13-2\\"		//测试图像的分类框图文件夹2
 #define ResultImageFile_3 "..\\Data\\Result\\13-3\\"		//测试图像的分类框图文件夹3
-#define TestVideo "../Data/TestVideo/vivi-2017.3.12.avi"			//用于检测的测试视频
-#define ResultVideo "../Data/Result/vivi-2017.3.12.avi"			//测试视频的检测结果
+#define TestVideo "../Data/TestVideo/328.avi"			//用于检测的测试视频
+#define ResultVideo "../Data/Result/328.avi"			//测试视频的检测结果
 #define ResultVideoFile_1 "..\\Data\\Result\\vivi-2017.3.12\\"	//测试视频的分类框图文件夹1
 #define ResultVideoFile_2 "..\\Data\\Result\\vivi-2017.3.12\\"	//测试视频的分类框图文件夹2
 #define ResultVideoFile_3 "..\\Data\\Result\\vivi-2017.3.12\\"	//测试视频的分类框图文件夹3

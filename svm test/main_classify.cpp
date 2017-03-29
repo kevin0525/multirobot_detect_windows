@@ -18,7 +18,7 @@
 //int main()  
 //{
 //	//变量定义
-//	HOGDescriptor hogClassifyTrain(WinSizeClassify,BlockSizeClassify,BlockStrideClassify,CellSizeClassify,NbinsClassify);
+//	HOGDescriptor classifyHOG(WinSizeClassify,BlockSizeClassify,BlockStrideClassify,CellSizeClassify,NbinsClassify);
 //	int descriptorDimClassfy;
 //	MySVM classifySvm;//分类SVM
 //
@@ -67,7 +67,7 @@
 //				}
 //
 //				vector<float> descriptorsClassify;//HOG描述子向量
-//				hogClassifyTrain.compute(srcClassify,descriptorsClassify);
+//				classifyHOG.compute(srcClassify,descriptorsClassify);
 //
 //				if(num == 0)//处理第一个样本时初始化特征向量矩阵和类别矩阵  
 //				{
@@ -102,7 +102,7 @@
 //				}
 //
 //				vector<float> descriptorsClassify;//HOG描述子向量
-//				hogClassifyTrain.compute(srcClassify,descriptorsClassify);//计算HOG描述子
+//				classifyHOG.compute(srcClassify,descriptorsClassify);//计算HOG描述子
 //
 //				//将计算好的HOG描述子复制到特征向量矩阵和类别矩阵
 //				for(int i=0; i<descriptorDimClassfy; i++)
@@ -129,7 +129,7 @@
 //				}
 //
 //				vector<float> descriptorsClassify;//HOG描述子向量
-//				hogClassifyTrain.compute(srcClassify,descriptorsClassify);//计算HOG描述子
+//				classifyHOG.compute(srcClassify,descriptorsClassify);//计算HOG描述子
 //
 //				//将计算好的HOG描述子复制到特征向量矩阵和类别矩阵
 //				for(int i=0; i<descriptorDimClassfy; i++)
@@ -156,7 +156,7 @@
 //				}
 //
 //				vector<float> descriptorsClassify;//HOG描述子向量
-//				hogClassifyTrain.compute(srcClassify,descriptorsClassify);//计算HOG描述子
+//				classifyHOG.compute(srcClassify,descriptorsClassify);//计算HOG描述子
 //
 //				//将计算好的HOG描述子复制到特征向量矩阵和类别矩阵
 //				for(int i=0; i<descriptorDimClassfy; i++)
@@ -184,7 +184,6 @@
 //	//----------------进行机器人和障碍物的检测与分类-----------------
 //	//---------------------------------------------------------------
 //	//变量定义
-//	HOGDescriptor classifyHOG(WinSizeClassify,BlockSizeClassify,BlockStrideClassify,CellSizeClassify,NbinsClassify);//检测HOG：用于计算检测结果的HOG特征向量
 //	descriptorDimClassfy = classifySvm.get_var_count();
 //	int supportVectorNumClassify = classifySvm.get_support_vector_count(); 
 //	cout<<"Classify支持向量个数："<<supportVectorNumClassify<<endl; 

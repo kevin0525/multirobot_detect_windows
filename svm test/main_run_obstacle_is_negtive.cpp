@@ -25,7 +25,7 @@
 //	//---------------------------------------------------------------
 //	//变量定义
 //	HOGDescriptor detectHOG(WinSizeDetect,BlockSizeDetect,BlockStrideDetect,CellSizeDetect,NbinsDetect);//分类HOG检测器
-//    descriptorDimDetect = detectSvm.get_var_count();//特征向量的维数，即HOG描述子的维数（和前面训练时的大小一样，添加此句是为了在不训练时也能拿到维数）
+//	descriptorDimDetect = detectSvm.get_var_count();//特征向量的维数，即HOG描述子的维数（和前面训练时的大小一样，添加此句是为了在不训练时也能拿到维数）
 //	int supportVectorDetectNum = detectSvm.get_support_vector_count();//支持向量的个数
 //    cout<<"Detect支持向量个数："<<supportVectorDetectNum<<endl;  
 //    Mat alphaDetectMat = Mat::zeros(1, supportVectorDetectNum, CV_32FC1);//alpha向量，长度等于支持向量个数
