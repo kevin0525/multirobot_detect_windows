@@ -1,9 +1,9 @@
 //-----------------------宏定义----------------------------
 //---------------------------------------------------------
-#define IrobotSetNo 276			//机器人样本个数  
-#define ObstacleSetNo 151		//障碍样本个数
-#define BackgroundSetNo 498		//背景样本个数
-#define HardBackgroundSetNo 13	//Hard背景样本个数
+#define IrobotSetNo 313			//机器人样本个数  
+#define ObstacleSetNo 174		//障碍样本个数
+#define BackgroundSetNo 499		//背景样本个数
+#define HardBackgroundSetNo 18	//Hard背景样本个数
 
 #define SHOWSET false			//是否显示训练样本
 #define TRAIN true				//是否进行训练,true表示训练，false表示读取xml文件中的SVM模型
@@ -34,7 +34,7 @@
 #define NbinsDetect 9					//直方图bin个数
 
 //HOG描述子参数
-#define WinSizeClassify Size(56,56)		//检测窗口尺寸
+#define WinSizeClassify Size(40,40)		//检测窗口尺寸
 #define BlockSizeClassify Size(16,16)		//block尺寸
 #define BlockStrideClassify Size(8,8)	//block步长
 #define CellSizeClassify Size(8,8)		//cell尺寸
@@ -79,8 +79,8 @@
 #define ClassifySvmName "../Data/Result/SVM_HOG_Classify.xml"//保存与读取的分类模型文件名称
 
 
-#define TrainPerc 0.8		//训练比例
-#define VaildPerc 0.2		//交叉验证比例
+#define TrainPerc 1		//训练比例
+#define VaildPerc 0		//交叉验证比例
 //#define TestPerc 0.2
 #define IrobotTrainNo (int(IrobotSetNo * TrainPerc))//训练样本数量
 #define ObstacleTrainNo (int(ObstacleSetNo * TrainPerc))

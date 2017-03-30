@@ -154,7 +154,7 @@
 //			}
 //			else if (classifyResult ==3)//背景
 //			{
-//				//rectangle(dst, found[i], Scalar(0,0,255), 3);//在图中画出检测框
+//				rectangle(dst, found[i], Scalar(0,0,255), 3);//在图中画出检测框
 //				if (SAVESET)//是否保存检测数据
 //				{
 //					strstream ss;

@@ -168,7 +168,7 @@
 //
 //		//5.训练检测SVM分类器  
 //		//迭代终止条件，当迭代满1000次或误差小于FLT_EPSILON时停止迭代
-//		CvTermCriteria detectCriteria = cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 1000, FLT_EPSILON);  
+//		CvTermCriteria detectCriteria = cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 10000, FLT_EPSILON);  
 //		//SVM参数：SVM类型为C_SVC；线性核函数；松弛因子C=0.01
 //		CvSVMParams detectParam(CvSVM::C_SVC, CvSVM::LINEAR, 0, 1, 0, 0.01, 0, 0, 0, detectCriteria);  
 //		cout<<"开始训练检测SVM分类器"<<endl;  
