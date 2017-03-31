@@ -7,7 +7,7 @@
 
 #define SHOWSET false			//是否显示训练样本
 #define TRAIN true				//是否进行训练,true表示训练，false表示读取xml文件中的SVM模型
-#define SAVESET true			//是否保存检测数据
+#define SAVESET false			//是否保存检测数据
 
 /*//for cpu
 //HOG描述子参数
@@ -79,8 +79,8 @@
 #define ClassifySvmName "../Data/Result/SVM_HOG_Classify.xml"//保存与读取的分类模型文件名称
 
 
-#define TrainPerc 1		//训练比例
-#define VaildPerc 0		//交叉验证比例
+#define TrainPerc 0.8		//训练比例
+#define VaildPerc 0.2		//交叉验证比例
 //#define TestPerc 0.2
 #define IrobotTrainNo (int(IrobotSetNo * TrainPerc))//训练样本数量
 #define ObstacleTrainNo (int(ObstacleSetNo * TrainPerc))
