@@ -97,6 +97,10 @@
 //	int videoDelay=1000/videoRate;//每帧之间的延迟与视频的帧率相对应（设置跑程序的时候播放视频的速率）
 //	VideoWriter outputVideo(ResultVideo, CV_FOURCC('M', 'J', 'P', 'G'), videoRate, Size(videoWidth, videoHight));//设置视频类
 //
+//	//label
+//	LabelRobot label_irobot(50,10);
+//	LabelRobot label_obstacle(50,4);
+//
 //	//开始视频处理
 //	bool stop = false;
 //	for (int fnum = 1;!stop;fnum++)
@@ -110,8 +114,12 @@
 //
 //		//对图片进行多尺度机器人检测 
 //		cout<<"进行多尺度检测"<<endl;
-//		detectHOG.detectMultiScale(src, found, HitThreshold, WinStride, Size(0,0), DetScale, 2, false);
+//		detectHOG.detectMultiScale(src, found, HitThreshold, WinStride, Size(0,0), DetScale, 0.2, true);
 //		//参数：1源图像2输出检测矩形3特征向量和超平面的距离4移动步长(必须是block步长的整数倍)5边缘扩展6源图像图像每次缩小比例7聚类参数8聚类方式
+//
+//		//label
+//		vector<RobotMessage> irobots_message;
+//		vector<RobotMessage> obstacles_message;
 //
 //		//对检测到的图像进行分类
 //		for(int i=0; i<found.size(); i++)  
@@ -130,6 +138,7 @@
 //
 //			if (classifyResult == 1)//机器人
 //			{
+//				irobots_message.insert(irobots_message.end(),RobotMessage(found[i]));
 //				rectangle(dst, found[i], Scalar(255,0,0), 3);//在图中画出检测框
 //				if (SAVESET)//是否保存检测数据
 //				{
@@ -142,6 +151,7 @@
 //			} 
 //			else if (classifyResult == 2)//障碍物
 //			{
+//				obstacles_message.insert(obstacles_message.end(),RobotMessage(found[i]));
 //				rectangle(dst, found[i], Scalar(0,255,0), 3);//在图中画出检测框
 //				if (SAVESET)//是否保存检测数据
 //				{
@@ -164,10 +174,27 @@
 //					imwrite(s,src(found[i]));
 //				}
 //			}
-//			else//其他
-//			{
-//				rectangle(dst, found[i], Scalar(255,255,255), 3);//在图中画出检测框
-//			}
+//		}
+//
+//		//label
+//		label_irobot.input(irobots_message);
+//		label_irobot.getLabel(irobots_message);
+//		label_obstacle.input(obstacles_message);
+//		label_obstacle.getLabel(obstacles_message);
+//
+//		for (int i = 0; i < irobots_message.size(); i++)
+//		{
+//			char label[8];
+//			sprintf(label,"%d",irobots_message[i].label);
+//			//在图像上放置坐标 参数为：图片，文字，文字在图像中的左下角坐标，字体类型，大小，颜色，粗细，线型
+//			putText(dst,label,irobots_message[i].center,FONT_HERSHEY_SIMPLEX,2,CV_RGB(0,0,0),2,10);
+//		}
+//		for (int i = 0; i < obstacles_message.size(); i++)
+//		{
+//			char label[8];
+//			sprintf(label,"%d",obstacles_message[i].label);
+//			//在图像上放置坐标 参数为：图片，文字，文字在图像中的左下角坐标，字体类型，大小，颜色，粗细，线型
+//			putText(dst,label,obstacles_message[i].center,FONT_HERSHEY_SIMPLEX,2,CV_RGB(0,0,0),2,10);
 //		}
 //
 //		//储存视频图像
