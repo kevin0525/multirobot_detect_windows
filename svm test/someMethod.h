@@ -9,28 +9,80 @@
 #include <time.h>
 
 using namespace cv;
-//-----------------------继承类----------------------------
-//---------------------------------------------------------
-//继承自CvSVM的类，因为生成setSVMDetector()中用到的检测子参数时，需要用到训练好的SVM的decision_func参数，  
-//但通过查看CvSVM源码可知decision_func参数是protected类型变量，无法直接访问到，只能继承之后通过函数访问  
+using namespace std;
+
+//SVM: decision_func is "protected", to get alpha and rho, you have to create a class to inherit from CvSVM
 class MySVM : public CvSVM  
 {  
 public:  
-	//获得SVM的决策函数中的alpha数组  
 	double * get_alpha_vector()  
-	{  
+	{
 		return this->decision_func->alpha;  
-	}  
-
-	//获得SVM的决策函数中的rho参数,即偏移量  
+	}
 	float get_rho()  
-	{  
+	{
 		return this->decision_func->rho;  
-	}  
-};  
+	}
+};
 
-//-------生成一个打乱的数组（从0开始的连续整数）-----------------
-//---------------------------------------------------------
+//HOG: set detectHOG from detectSvm
+void setHOG(MySVM &detectSvm, HOGDescriptor &detectHOG)
+{
+
+	//dimension of HOG descriptor: 
+	//[(window_width-block_width)/block_stride_width+1]*[(window_height-block_height)/block_stride_height+1]*bin_number*(block_width/cell_width)*(block_height/cell_height)
+	int descriptorDimDetect;
+	//int descriptorDimClassify;
+	descriptorDimDetect = detectSvm.get_var_count();
+	//descriptorDimClassify = classifySvm.get_var_count();
+	int supportVectorDetectNum = detectSvm.get_support_vector_count();
+	//int supportVectorCassifyNum = classifySvm.get_support_vector_count();
+	cout<<"number of Detect SVM: "<<supportVectorDetectNum<<endl;  
+	//cout<<"number of Classify SVM: "<<supportVectorCassifyNum<<endl;  
+	Mat alphaDetectMat = Mat::zeros(1, supportVectorDetectNum, CV_32FC1);
+	//Mat alphaClassifyMat = Mat::zeros(1, supportVectorCassifyNum, CV_32FC1);
+	Mat supportVectorDetectMat = Mat::zeros(supportVectorDetectNum, descriptorDimDetect, CV_32FC1); 
+	//Mat supportVectorClassifyMat = Mat::zeros(supportVectorCassifyNum, descriptorDimClassify, CV_32FC1);
+	Mat resultDetectMat = Mat::zeros(1, descriptorDimDetect, CV_32FC1); 
+	//Mat resultClassifyMat = Mat::zeros(1, descriptorDimClassify, CV_32FC1); 
+
+	//compute w array
+	for(int i=0; i<supportVectorDetectNum; i++)
+	{
+		const float * pSVData = detectSvm.get_support_vector(i);
+		for(int j=0; j<descriptorDimDetect; j++)  
+			supportVectorDetectMat.at<float>(i,j) = pSVData[j];  
+	}
+	//for(int i=0; i<supportVectorCassifyNum; i++)
+	//{
+	//	const float * pSVData = classifySvm.get_support_vector(i);
+	//	for(int j=0; j<descriptorDimClassify; j++)  
+	//		supportVectorClassifyMat.at<float>(i,j) = pSVData[j];  
+	//}
+	double * pAlphaDetectData = detectSvm.get_alpha_vector();
+	//double * pAlphaClassifyData = classifySvm.get_alpha_vector();
+	for(int i=0; i<supportVectorDetectNum; i++)
+		alphaDetectMat.at<float>(0,i) = pAlphaDetectData[i];  
+	//for(int i=0; i<supportVectorCassifyNum; i++)
+	//	alphaClassifyMat.at<float>(0,i) = pAlphaClassifyData[i];  
+	resultDetectMat = -1 * alphaDetectMat * supportVectorDetectMat;//resultMat = -(alphaMat * supportVectorMat)
+	//resultClassifyMat = -1 * alphaClassifyMat * supportVectorClassifyMat;//resultMat = -(alphaMat * supportVectorMat)
+
+	//get detector for setSVMDetector(const vector<float>& detector)
+	vector<float> myDetector;
+	for(int i=0; i<descriptorDimDetect; i++)//add resultMat
+		myDetector.push_back(resultDetectMat.at<float>(0,i));  
+	myDetector.push_back(detectSvm.get_rho());//add rho  
+	cout<<"dimension of detect SVM Detector (w+b): "<<myDetector.size()<<endl;
+
+	//set SVMDetector
+	detectHOG.setSVMDetector(myDetector);  
+
+	return;
+}
+
+
+//Train: create a disorder array (elements are integer from zero to n-1)
 void random(int a[], int n)
 {
 	for (int nu = 0;nu<n;nu++)
@@ -51,8 +103,7 @@ void random(int a[], int n)
 	}
 }
 
-//--------根据元素大小赋予类型（0-train,1-vaild,2-test）----------------------
-//---------------------------------------------------------
+//Train: initial type array (0-train,1-vaild,2-test)
 void typeHandle(int arr[],int setNo,int trainNo,int vaildNo)
 {
 	for (int i = 0;i<setNo;i++)
@@ -72,7 +123,7 @@ void typeHandle(int arr[],int setNo,int trainNo,int vaildNo)
 	}
 }
 
-//struct for robot message
+//Label: struct for robot message
 struct RobotMessage
 {
 	Rect location_image;//robot location on image
@@ -99,7 +150,7 @@ struct RobotMessage
 	}
 };
 
-//class for labeling robot
+//Label: class for labeling robot
 class LabelRobot
 {
 private:
@@ -159,7 +210,6 @@ private:
 
 			if (robots_last_temp.size() == 0)
 			{
-				//addOtherLabel(robots_temp, robots_labeled);
 				for (int i = 0; i<robots_temp.size();i++)
 				{
 					label_max++;
@@ -184,7 +234,6 @@ private:
 
 			if (distance_min > distance_max)
 			{
-				//addOtherLabel(robots_temp, robots_labeled);
 				for (int i = 0; i<robots_temp.size();i++)
 				{
 					label_max++;
@@ -221,15 +270,5 @@ private:
 			}
 		}
 	}
-
-	//void addOtherLabel(vector<RobotMessage> &robots_temp, vector<RobotMessage> &robots_labeled)
-	//{
-	//	for (int i = 0; i<robots_temp.size();i++)
-	//	{
-	//		label_max++;
-	//		robots_temp[i].label = label_max;
-	//	}
-	//	robots_labeled.insert(robots_labeled.end(), robots_temp.begin(), robots_temp.end());
-	//}
 };
 
