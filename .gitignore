@@ -235,3 +235,4 @@ svm test.sln
 *.txt
 svm test/svm test.vcxproj
 *.filters
+*.sln

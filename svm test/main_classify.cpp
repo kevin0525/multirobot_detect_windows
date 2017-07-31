@@ -168,9 +168,9 @@
 //
 //		//6.训练分类SVM分类器  
 //		//迭代终止条件，当迭代满1000次或误差小于FLT_EPSILON时停止迭代
-//		CvTermCriteria classifyCriteria = cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 1000, FLT_EPSILON);  
-//		//SVM参数：SVM类型为C_SVC；线性核函数；松弛因子C=0.01
-//		CvSVMParams classifyParam(CvSVM::C_SVC, CvSVM::LINEAR, 0, 1, 0, 0.01, 0, 0, 0, classifyCriteria);  
+//		CvTermCriteria classifyCriteria = cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 10000, FLT_EPSILON);  
+//		//SVM参数：SVM类型为C_SVC；RBF核函数,gamma为1
+//		CvSVMParams classifyParam(CvSVM::C_SVC, CvSVM::RBF, 0, 0.7, 0, 1, 0, 0, 0, classifyCriteria);  
 //		cout<<"开始训练分类SVM分类器"<<endl;  
 //		classifySvm.train(sampleFeatureClassifyMat, classifyLabelMat, Mat(), Mat(), classifyParam);//训练分类器
 //		cout<<"训练完成"<<endl;  

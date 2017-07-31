@@ -24,7 +24,7 @@
 //	//----------------进行机器人和障碍物的检测与分类-----------------
 //	//---------------------------------------------------------------
 //	//变量定义
-//	HOGDescriptor detectHOG(WinSizeDetect,BlockSizeDetect,BlockStrideDetect,CellSizeDetect,NbinsDetect);//分类HOG检测器
+//	HOGDescriptor detectHOG(WinSizeDetect,BlockSizeDetect,BlockStrideDetect,CellSizeDetect,NbinsDetect,1,-1,0,0.2,false,10);//分类HOG检测器
 //	descriptorDimDetect = detectSvm.get_var_count();//特征向量的维数，即HOG描述子的维数（和前面训练时的大小一样，添加此句是为了在不训练时也能拿到维数）
 //	int supportVectorDetectNum = detectSvm.get_support_vector_count();//支持向量的个数
 //    cout<<"Detect支持向量个数："<<supportVectorDetectNum<<endl;  
@@ -64,7 +64,7 @@
 //	system(sd1);
 //
 //	//打开视频
-//	if(!myVideo.isOpened()){cout<<"视频读取错误"<<endl;system("puase");return -1;}
+//	if(!myVideo.isOpened()){cout<<"视频读取错误"<<endl;getchar();return -1;}
 //
 //	//设置生成的视频
 //	double videoRate=myVideo.get(CV_CAP_PROP_FPS);//获取帧率
