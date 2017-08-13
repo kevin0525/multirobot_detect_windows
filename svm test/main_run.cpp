@@ -57,6 +57,8 @@
 //			//5. window stride (must be integer multiple to block stride!!!) 6.extend on src edge 7.scale resize ratio for every detection 
 //			//8.cluster parameter (if meanshift cluster flag is false, parameter means minimum possible number of rectangles minus 1. if true, parameter's function is similar to HitThreshold)
 //			//9.use meanshift cluster flag(false-cluster, still have overlap; true-meanshift cluster, without overlap)
+//		found = resize_boxes(found, src, DetectResizeRate);
+//
 //		//label
 //		vector<RobotMessage> irobots_message;
 //		vector<RobotMessage> obstacles_message;
