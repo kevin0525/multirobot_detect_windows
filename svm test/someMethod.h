@@ -179,26 +179,23 @@ public:
 
 	void input(const vector<RobotMessage> &input_irobots)
 	{
-		robots.clear();
-		robots.insert(robots.end(), input_irobots.begin(), input_irobots.end());
+		robots.assign(input_irobots.begin(), input_irobots.end());
 	}
 
 	void getLabel(vector<RobotMessage> &output_robots)
 	{
 		labelRobot();
-		output_robots.clear();
-		output_robots.insert(output_robots.end(), robots.begin(), robots.end());
-		robots_last.clear();
-		robots_last.insert(robots_last.end(), robots.begin(), robots.end());
+		output_robots.assign(robots.begin(), robots.end());
+		robots_last.assign(robots.begin(), robots.end());
 	}
 
 private:
 	void labelRobot()
 	{
 		vector<RobotMessage> robots_temp;
-		robots_temp.insert(robots_temp.end(), robots.begin(), robots.end());
+		robots_temp.assign(robots.begin(), robots.end());
 		vector<RobotMessage> robots_last_temp;
-		robots_last_temp.insert(robots_last_temp.end(), robots_last.begin(), robots_last.end());
+		robots_last_temp.assign(robots_last.begin(), robots_last.end());
 		vector<RobotMessage> robots_labeled;
 
 		while(1)
@@ -251,12 +248,12 @@ private:
 			}
 		}
 
-		robots.clear();
-		robots.insert(robots.end(), robots_labeled.begin(), robots_labeled.end());
+		robots.assign(robots_labeled.begin(), robots_labeled.end());
 	}
 
 	void calculateMinDistance(RobotMessage &robots_temp_i, vector<RobotMessage> &robots_last_temp, int &pair_number_i)
 	{
+		robots_temp_i.distance_min = 10000.0;
 		float dx, dy, distance;
 		for (int i = 0; i<robots_last_temp.size(); i++)
 		{
