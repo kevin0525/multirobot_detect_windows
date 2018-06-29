@@ -6,6 +6,8 @@
 //#include <opencv2/imgproc/imgproc.hpp>  
 //#include <opencv2/objdetect/objdetect.hpp>  
 //#include <opencv2/ml/ml.hpp>  
+//#include "someMethod.h"
+//#include "parameter.h"
 //
 //using namespace std;  
 //using namespace cv;  
@@ -364,11 +366,11 @@
 //	VideoCapture myVideo(TestVideo);//读取视频  
 //	Mat src,dst;					//原始图像，处理后图像
 //	
-//	const char * sd1 = {"md "ResultVideoFile_1};//创建存放检测框图的文件夹
+//	const char * sd1 = {"md " ResultVideoFile_1};//创建存放检测框图的文件夹
 //	system(sd1);
-//	const char * sd2 = {"md "ResultVideoFile_2};//创建存放检测框图的文件夹
+//	const char * sd2 = {"md " ResultVideoFile_2};//创建存放检测框图的文件夹
 //	system(sd2);
-//	const char * sd3 = {"md "ResultVideoFile_3};//创建存放检测框图的文件夹
+//	const char * sd3 = {"md " ResultVideoFile_3};//创建存放检测框图的文件夹
 //	system(sd3);
 //
 //	//打开视频
